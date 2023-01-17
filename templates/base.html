@@ -1,0 +1,19 @@
+{% load tailwind_tags %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    {% tailwind_css %}
+    {% block title %}
+        <title>Accueil</title>
+    {% endblock %}
+</head>
+<body>
+    <section  id="Review">
+
+        {% block content %}
+        {% endblock %}
+
+    </section>
+</body>
+</html>
