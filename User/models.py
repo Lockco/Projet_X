@@ -1,29 +1,42 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
+from itertools import chain
+from Ticket.models import Ticket
+from Reviews.models import Review
 
-# Create your models here.
-User = get_user_model()
+
+class User(AbstractBaseUser):
+    email = models.EmailField(unique=True)
+    nom = models.CharField(max_length=255)
+    prenom = models.CharField(max_length=255)
+    date_naissance = models.DateField()
+    followers = models.ManyToManyField('self', related_name='following', symmetrical=False)
+    tickets_created = models.ManyToManyField(Ticket, related_name='tickets_created')
+    reviews_created = models.ManyToManyField(Review, related_name='reviews_created')
+    is_active = models.BooleanField(default=True)
+
+    def follow(self, user):
+        self.followers.add(user)
+
+    def unfollow(self, user):
+        self.followers.remove(user)
+
+    def get_stream(self):
+        tickets = self.tickets_created.all()
+        reviews = self.reviews_created.all()
+        following_tickets = Ticket.objects.filter(user__in=self.followers.all())
+        following_reviews = Review.objects.filter(user__in=self.followers.all())
+        return list(chain(tickets, reviews, following_tickets, following_reviews))
+    
+    USERNAME_FIELD = 'email'
 
 
-class User(models.Model):
-	user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following')
-	followed_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following_by')
+class UserFollows(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="follower")
+    followed_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="followed")
+    time_created = models.DateTimeField(auto_now_add=True)
 
-	class META:
-		unique_together = ('user', 'followed_user')
-		verbose_name = 'Utilisateur'
-		verbose_plural_name = 'Tous les Utilisateurs'
+    class Meta:
+        unique_together = ('user', 'followed_user', )
 
-	def __str__(self):
-		return f"{self.user}-{self.followed_user}"
 
-	@property
-	def user_string(self):
-		if self.user:
-			return "l'utilisateur est disponible"
-		else:
-			return "l'utilisateur n'est pas disponible"
-
-	def save(self, *args, **kwargs):
-
-		super().save(*args, **kwargs)
