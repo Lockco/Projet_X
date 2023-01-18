@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>S'inscrire</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    <label for="email">Adresse email :</label>
+    <input type="email" name="email" required>
+    <br>
+    <label for="nom">Nom :</label>
+    <input type="text" name="nom" required>
+    <br>
+    <label for="prenom">Prénom :</label>
+    <input type="text" name="prenom" required>
+    <br>
+    <label for="date_naissance">Date de naissance :</label>
+    <input type="date" name="date_naissance" required>
+      <br>
+    <label for="password1">Mot de passe :</label>
+    <input type="password" name="password1" required>
+    <br>
+    <label for="password2">Confirmer le mot de passe :</label>
+    <input type="password" name="password2" required>
+    <br>
+    <input type="submit" value="S'inscrire">
+  </form>
+  <br>
+  <p>Vous avez déjà un compte? <a href="{% url 'users:login' %}">Se connecter</a></p>
+{% endblock %}
