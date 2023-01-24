@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Bienvenue sur LITReview</h1>
+  <h2>Les dernières reviews</h2>
+  <ul>
+    {% for review in reviews %}
+      <li>
+        <h3>{{ review.headline }}</h3>
+        <p>{{ review.body }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

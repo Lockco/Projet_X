@@ -1,7 +1,3 @@
-# from django.shortcuts import render
-# from Reviews.models import Review
+from django.shortcuts import render
 
-# def reviews_view(request):
-#     reviews = Review.objects.all()
-#     context = {'reviews': reviews}
-#     return render(request, 'reviews.html', context)
+# Create your views here.
