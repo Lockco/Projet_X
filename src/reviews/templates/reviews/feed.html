@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Flux de publications</title>
+{% endblock %}
+
+
+
+{% block content %}
+<div class="button-top">
+    <form action="/edit-ticket">
+        <button class="btn-edit-review">Demander une critique</button>
+    </form>
+
+    <form action="/create">
+        <button class="btn-create-review">Créer une critique</button>
+    </form>
+</div>
+  <h1>Flux de publications</h1>
+
+    {% for post in posts %}
+      {% if post.content_type == 'TICKET' %}
+        {% include 'tickets/ticket_snippet.html' with post=post %}
+      {% elif post.content_type == 'REVIEW' %}
+        {% include 'reviews/review_snippet.html' with post=post %}
+      {% endif %}
+    {% endfor %}
+
+{% endblock %}

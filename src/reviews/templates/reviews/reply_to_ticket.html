@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+      <article class="ticket-card">
+        <div class="ticket-card-right">
+            <h5>Vous êtes entrain de répondre au ticket de {{ ticket.user }}</h5>
+            {% if ticket and ticket.image %}
+            <img src="{{ticket.image.url }}" alt="{{ ticket.title }}">
+            {% endif %}
+            <h1>{{ ticket.title }}</h1>
+            <p>Description : <br><br> {{ ticket.description }}</p>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Envoyer">
+            </form>
+        </div>
+      </article>
+
+{% endblock %}

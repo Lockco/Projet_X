@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+@import "style.css";
+
+
+body {
+    background-color: mintcream;
+    font-family: 'Raleway', sans-serif;
+}
+
+nav {
+    background-color: #333;
+    padding: 10px;
+  }
+
+nav ul {
+list-style-type: none;
+margin: 0;
+padding: 0;
+overflow: hidden;
+}
+
+nav li {
+float: right;
+}
+
+nav a {
+color: white;
+text-align: center;
+padding: 14px 16px;
+text-decoration: none;
+font-size: 17px;
+}
+
+nav a:hover {
+background-color: #111;
+}
+
+#blog {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+
+}
+
+#blog article {
+
+    width: 50%;
+    margin-top: 2rem;
+    padding: 2px;
+    border: 2px solid #c4c0c0;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+
+    #blog article {
+
+        width: 85%;
+
+    }
+
+}
+
+.post-title {
+    display: flex;
+    align-items: center;
+}
+
+.post-title a{
+    color: steelblue;
+    text-decoration: none;
+    margin-left: 5rem;
+}
+
+.post-title a:last-child{
+    color: red;
+}
+
+.post-title > div{
+    margin-left: auto;
+}
+
+.post-author{
+    margin: .5rem 0;
+
+}
+
+.post-excerpt{
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+.post-detail{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post-detail > h1{
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+p{
+    text-align: justify;
+}
+
+input, textarea{
+
+    display: block;
+    padding: .75rem;
+    line-height: 1.5;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    min-width: 600px;
+}
+
+label{
+    display: inline-block;
+    box-sizing: border-box ;
+    margin: 1rem 0;
+}
+
+#button-top{
+
+    background: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: center;
+    margin: 10px auto;
+    display: block;
+
+}
+
+.btn-edit-review, .btn-create-review{
+    background: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: center;
+    margin: 10px auto;
+    display: block;
+}
+
+.btn-edit-review:hover, .btn-create-review:hover{
+    background: #3E8E41;
+}
