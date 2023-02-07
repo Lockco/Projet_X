@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+        <title>LITReview</title>
+    {% endblock %}
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<nav>
+  <ul>
+
+      {% if request.user.is_authenticated %}
+      <li><a href="{% url 'followers:logout' %}">déconnexion</a></li>
+      <li><a href="{% url 'followers:profile' %}">bonjour {{ user.username }}</a></li>
+      {% else %}
+      <li><a href="{% url 'followers:login' %}">Se connecter</a></li>
+      {% endif %}
+      <li><a href="{% url 'reviews:user_post' %}">Post</a></li>
+      <li><a href="{% url 'followers:follow' %}">Abonnements</a></li>
+      <li><a href="{% url 'reviews:feed' %}">Flux</a></li>
+
+  </ul>
+
+</nav>
+
+    <section class="hero">
+
+        {% block content %}
+        {% endblock %}
+
+    </section>
+</body>
+</html>

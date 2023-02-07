@@ -1,0 +1,36 @@
+{% block content %}
+
+<div class="container">
+		<!-- Boucle sur les publications -->
+			<div class="post">
+				<div class="post-header">
+					<img src="https://static.vecteezy.com/ti/vecteur-libre/t2/2002403-homme-avec-barbe-avatar-personnage-icone-isole-gratuit-vectoriel.jpg" alt="Avatar">
+					<div>
+						<p><i>{{ post.user }}</i> a demandé une critique  <i>le {{ post.time_created|date:'j F Y' }}</i></p>
+					</div>
+				</div>
+				<div class="post-content">
+					<div class="rating">
+                        <div>
+                            <h3>{{ post.title }}</h3>
+						</div>
+					</div>
+					<div class="book-review">
+						<div class="book-cover">
+					        {% if post.ticket and post.ticket.image %}
+							  <img src="{{ post.ticket.image.url }}" alt="{{ post.headline }}">
+							{% endif %}
+						</div>
+						<div class="book-description">
+					 		<p>{{ post.description |safe|truncatewords:50 }}</p>
+						</div>
+					</div>
+					<div>
+						<form action="{% url 'reviews:reply_to_ticket' post.id %}">
+							<button class="btn-edit-review">Demander une critique</button>
+						</form>
+					</div>
+				</div>
+			</div>
+</div>
+{% endblock %}

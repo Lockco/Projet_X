@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>LITReview</title>
+{% endblock %}
+
+
+{% block content %}
+<div class="button-top">
+    <div class="btn-update-ticket">
+      <form action="/edit-ticket">
+          <button class="btn-edit-review">Demander une critique</button>
+      </form>
+
+      <form action="/create">
+          <button class="btn-create-review">Créer une critique</button>
+      </form>
+    </div>
+</div>
+    {% for post in posts %}
+      {% if post.content_type == 'TICKET' %}
+        {% include 'tickets/ticket_snippet.html' with post=post %}
+      {% elif post.content_type == 'REVIEW' %}
+        {% include 'reviews/review_snippet.html' with post=post %}
+      {% endif %}
+    {% endfor %}
+
+{% endblock %}

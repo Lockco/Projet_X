@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Consulter les Reviews</title>
+{% endblock %}
+{% block content %}
+  <h1>Mes publications</h1>
+  {% for review in reviews %}
+<div class="container">
+  <div class="post">
+    <div class="post-header">
+      <img class="post-avatar" src="https://static.vecteezy.com/ti/vecteur-libre/t2/2002403-homme-avec-barbe-avatar-personnage-icone-isole-gratuit-vectoriel.jpg" alt="Avatar">
+      <div class="post-header-text">
+        <p class="post-header-username">Vous avez publié cette article le {{ review.time_created|date:'j F Y' }}</p>
+        <div class="btn-update-review">
+          <form action="{% url 'reviews:edit_review' review.id %}">
+            <button class="btn-edit-review">Modifier ma critique</button>
+        </form>
+    
+        <form action="{% url 'reviews:delete_review' review.id %}">
+            <button class="btn-create-review">Supprimer ma critique</button>
+        </form>
+        </div>
+      </div>
+    </div>
+				<!-- Critiques -->
+				<div class="post-content">
+					<div class="rating">
+                        <div class='review.headline'>
+                            <h2>{{ review.headline }}</h2>
+                              <div class='review.headline'>
+                                {% if review.rating == 1 %}
+                                  <div>&#9733</div>
+                                {% endif %}
+                                {% if review.rating == 2 %}
+                                  <div>&#9733&#9733</div>
+                                {% endif %}
+                                {% if review.rating == 3 %}
+                                  <div>&#9733&#9733&#9733</div>
+                                {% endif %}
+                                {% if review.rating == 4 %}
+                                  <div>&#9733&#9733&#9733&#9733</div>
+                                {% endif %}
+                                {% if review.rating == 5 %}
+                                  <div>&#9733&#9733&#9733&#9733&#9733</div>
+                                {% endif %}
+                                </div>
+                        </div>
+					</div>
+          <div class="book-review">
+              <div class="book-cover">
+                {% if review.ticket and review.ticket.image %}
+                  <img src="{{ review.ticket.image.url }}" alt="{{ review.headline }}">
+                {% endif %}
+              </div>
+              <div class="book-description">
+                <p>{{ review.body }}</p>
+              </div>
+          </div>
+        </div>
+  </div>
+</div>
+  {% endfor %}
+    {% for ticket in tickets %}
+<!-- Critiques -->
+<div class="container">
+  <div class="post">
+    <div class="post-header">
+      <img class="post-avatar" src="https://static.vecteezy.com/ti/vecteur-libre/t2/2002403-homme-avec-barbe-avatar-personnage-icone-isole-gratuit-vectoriel.jpg" alt="Avatar">
+      <div class="post-header-text">
+        <p class="post-header-username">Vous avez demandé cette critique le {{ ticket.time_created|date:'j F Y' }}</p>
+      </div>
+    </div>
+    <div class="btn-update-ticket">
+      <form action="{% url 'reviews:reply_to_ticket' ticket.id %}">
+        <button class="btn-edit-review">Modifier ma critique</button>
+      </form>
+
+    <form action="/create">
+        <button class="btn-create-review">Supprimer ma critique</button>
+    </form>
+    </div>
+				<!-- Tickets -->
+          <div class="post-content">
+                        <div class="rating">
+                            <div class='review.headline'>
+                                <h5>{{ ticket.title }}</h5>
+                            </div>
+                        </div>
+                          <div class="book-review">
+                              <div class="book-cover">
+                                {% if review.ticket and review.ticket.image %}
+                                  <img src="{{ review.ticket.image.url }}" alt="{{ review.headline }}">
+                                {% endif %}
+                              </div>
+                              <div class="book-description">
+                                <p>{{ ticket.description}}</p>
+                              </div>
+
+                          </div>
+            </div>
+      </div>
+    </div>
+
+  {% endfor %}
+{% endblock %}

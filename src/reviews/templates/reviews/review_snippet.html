@@ -1,0 +1,77 @@
+{% block content %}
+
+
+<div class="container">
+  <div class="post">
+    <div class="post-header">
+      <img class="post-avatar" src="https://static.vecteezy.com/ti/vecteur-libre/t2/2002403-homme-avec-barbe-avatar-personnage-icone-isole-gratuit-vectoriel.jpg" alt="Avatar">
+      <div class="post-header-text">
+        <p class="post-header-username">Critique publié par <i>{{ post.user }}</i> le {{ post.time_created|date:'j F Y' }}</p>
+      </div>
+    </div>
+				<!-- Critiques -->
+				<div class="post-content">
+					<div class="rating">
+                        <div class='review.headline'>
+                            <h3>{{ post.headline }} -
+                            {% if post.rating == 1 %}
+                            &#9733</h3>
+                        </div>
+                        <div>
+                            {% elif post.rating == 2 %}
+                            &#9733&#9733</h3>
+                        </div>
+                        <div>
+                            {% elif post.rating == 3 %}
+                            &#9733&#9733&#9733</h3>
+                        </div>
+                        <div>
+                            {% elif post.rating == 4 %}
+                            &#9733&#9733&#9733&#9733</h3>
+                        </div>
+                        <div>
+                            {% elif post.rating == 5 %}
+                            &#9733&#9733&#9733&#9733&#9733</h3>
+                        </div>
+						{% endif %}
+
+					</div>
+          <div class="book-review">
+              <div class="book-cover">
+                {% if post.ticket and post.ticket.image %}
+                  <img src="{{ post.ticket.image.url }}" alt="{{ post.headline }}">
+                {% endif %}
+              </div>
+              <div class="book-description">
+                <p>{{ post.body |safe|truncatewords:50 }}</p>
+              </div>
+          </div>
+        </div>
+				<!-- Tickets -->
+            <div class="post">
+              <div class="post-header">
+                <img class="post-avatar" src="https://static.vecteezy.com/ti/vecteur-libre/t2/2002403-homme-avec-barbe-avatar-personnage-icone-isole-gratuit-vectoriel.jpg"alt="Avatar">
+                <div class="post-header-text">
+                  <h5><i>En réponse au ticket {{post.ticket_id}} demandé par {{ post.user }}</i> <i>le {{ post.time_created|date:'j F Y' }}</i></h5>
+                </div>
+              </div>
+              <div class="rating">
+                <div>
+                    <h3>{{ post.ticket.title }}</h3>
+                </div>
+              </div>
+              <div class="book-review">
+                <div class="book-cover">
+                  {% if post.ticket and post.ticket.image %}
+                    <img src="{{ post.ticket.image.url }}" alt="{{ post.headline }}">
+                  {% endif %}
+                </div>
+                <div class="book-description">
+                  <p>{{ post.ticket.description |safe|truncatewords:50 }}</p>
+                </div>
+            </div>
+            </div>
+					</div>
+  </div>
+</div>
+{% endblock %}

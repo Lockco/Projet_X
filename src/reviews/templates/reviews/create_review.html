@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h2>Créer une review</h2>
+  <div class="container">
+    <div class="post">
+        <div class="post-content">
+            <div class="btn-update-review">
+              <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input type="submit" value="Créer">
+              </form>
+            </div>
+        </div>
+    </div>
+  </div>
+{% endblock %}
