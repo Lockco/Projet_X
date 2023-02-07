@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h1>Suivre d'autres utilisateurs</h1>
+<div class="container">
+    <div class="post">
+        <div class="post-content">
+            <div class="btn-update-review">
+                <form method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group {% if field.errors %}has-error{% endif %}">
+                            {{ field.label_tag }} {{ field }}
+                            {% for error in field.errors %}
+                                <p class="help-block">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                    
+                    <button type="submit">S'abonner</button>
+                </form>
+            </div>
+                    <h2>Abonnements</h2>
+                        <ul>
+                        {% for user in followed_users%}
+                        <li>{{ user.username }}<div class="btn-update-review"><button action="{% url 'followers:unfollow' user.id %}">Se désabonner</button></div></li>
+                        {% endfor %}
+                        </ul>
+                    <h2>Abonnées</h2>
+                        <ul>
+                        {% for user in follow_by %}
+                        <li>{{ user.user }}</li>
+                        {% endfor %}
+                        </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <script>
+    $(document).ready(function() {
+      var users = [];
+      
+      {% for user in all_users %}
+        users.push("{{ user.username }}");
+      {% endfor %}
+      
+      $("input[name='username']").autocomplete({
+        source: users
+      });
+    });
+</script> -->
+{% endblock %}
+

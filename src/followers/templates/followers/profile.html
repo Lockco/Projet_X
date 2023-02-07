@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+  <div class="post">
+            <h2>Profil de {{ user.username }}</h2>
+            <p>Vous pouvez modifier vos informations</p>
+      <div class="post-content">
+          <div class="btn-update-review">
+            <form method="post">
+              {% csrf_token %}
+              {{ form|crispy }}
+              <p>Vous pouvez modifier vos informations</p>
+              <input type="submit" value="Sauvegarder">
+            </form>
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %}
